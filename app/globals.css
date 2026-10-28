@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 244 243 239;
+  --surface: 236 234 228;
+  --ink: 20 20 20;
+  --muted: 110 110 108;
+  --line: 214 212 205;
+  --accent: 47 108 160;
+  --card: 34 33 33;
+  --card-ink: 244 243 239;
+}
+
+[data-theme="dark"] {
+  --bg: 15 15 16;
+  --surface: 26 26 28;
+  --ink: 240 239 235;
+  --muted: 150 150 146;
+  --line: 44 44 46;
+  --accent: 96 165 224;
+  --card: 236 234 228;
+  --card-ink: 20 20 20;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--ink));
+  font-family: "Inter Variable", Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip; /* never allow sideways scroll on small screens */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.25);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero glow */
+.glow {
+  background: radial-gradient(
+    circle,
+    rgb(var(--accent) / 0.55) 0%,
+    rgb(var(--accent) / 0.2) 40%,
+    transparent 70%
+  );
+  filter: blur(30px);
+}
+
+/* Hero square-grid background */
+.hero-grid {
+  background-image:
+    linear-gradient(rgb(var(--line) / 0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--line) / 0.8) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center top;
+  -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent);
+  mask-image: linear-gradient(to bottom, #000 75%, transparent);
+}
+@media (min-width: 768px) {
+  .hero-grid { background-size: 90px 90px; }
+}
+
+.tick {
+  font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-marquee, .animate-pulseDot { animation: none; }
+}
